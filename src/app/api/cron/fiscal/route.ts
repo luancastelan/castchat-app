@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient as createClientRaw } from '@supabase/supabase-js'
 
-// Variáveis Universais do Server
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || ''
-const groqApiKey = process.env.NEXT_PUBLIC_GROQ_API_KEY || ''
-const evoUrl = process.env.EVOLUTION_API_URL || ''
-const evoKey = process.env.EVOLUTION_API_KEY || ''
-
 export async function GET(req: NextRequest) {
+    // Variáveis Universais do Server
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || ''
+    const groqApiKey = process.env.NEXT_PUBLIC_GROQ_API_KEY || ''
+    const evoUrl = process.env.EVOLUTION_API_URL || ''
+    const evoKey = process.env.EVOLUTION_API_KEY || ''
+
     // 1. Inicia Banco com Chave Mestra para bypassear Tenants (É um robo operando para TODOS)
     const supabaseAdmin = createClientRaw(supabaseUrl, supabaseServiceKey)
 

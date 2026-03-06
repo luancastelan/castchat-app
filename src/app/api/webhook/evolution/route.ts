@@ -2,13 +2,12 @@ import { NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { generateAiResponse, generateInternalRhResponse } from '@/lib/ai/service'
 
-// Instancia Client com service_role para bypass do RLS ao inserir mensagens do Webhook
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || ''
-const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey)
-
 export async function POST(request: Request) {
     try {
+        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
+        const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || ''
+        const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey)
+
         const body = await request.json()
 
         // Exemplo básico do Payload Evolution API (MESSAGES_UPSERT)
