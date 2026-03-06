@@ -6,9 +6,19 @@ export async function updateSession(request: NextRequest) {
         request,
     })
 
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+    const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+    // Fallback de Segurança: Se a Vercel não receber as Variáveis de Ambiente, 
+    // previne o erro 500 (MIDDLEWARE_INVOCATION_FAILED)
+    if (!supabaseUrl || !supabaseKey) {
+        console.warn('⚠️ Supabase ENV Vars ausentes no Middleware. Faça o Setup na Vercel.')
+        return supabaseResponse
+    }
+
     const supabase = createServerClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+        supabaseUrl,
+        supabaseKey,
         {
             cookies: {
                 getAll() {
